@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { prisma } from "../server";
-import { error } from "console";
+import { Prisma } from '@prisma/client'
 
 const createAutomobile = async (req: Request, res: Response) => {
   try {
@@ -89,9 +89,33 @@ const getAutomobileById = async (req: Request, res: Response) => {
   }
 };
 
+const listAutomobiles = async (req: Request, res: Response) => {
+  try {
+    const { color, brand } = req.query;
+
+    let filter: Prisma.AutomobileWhereInput = {};
+
+    if (color) {
+      filter = { ...filter, color: { equals: color.toString() } };
+    }
+    if (brand) {
+      filter = { ...filter, brand: { equals: brand.toString() } };
+    }
+
+    const automobiles = await prisma.automobile.findMany({
+      where: filter,
+    });
+
+    res.status(200).json(automobiles);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 export default {
   createAutomobile,
   updateAutomobile,
   deleteAutomobile,
-  getAutomobileById
+  getAutomobileById,
+  listAutomobiles
 }
