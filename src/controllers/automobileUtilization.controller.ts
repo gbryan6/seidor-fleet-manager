@@ -61,8 +61,23 @@ const finishAutomobileUtilization = async (req: Request, res: Response) => {
   }
 };
 
+const listAutomobileUtilizations = async (req: Request, res: Response) => {
+  try {
+    const utilizations = await prisma.automobileUtilization.findMany({
+      include: {
+        driver: true,
+        automobile: true,
+      },
+    });
+
+    res.status(200).json(utilizations);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
 
 export default {
   createAutomobileUtilization,
-  finishAutomobileUtilization
+  finishAutomobileUtilization,
+  listAutomobileUtilizations
 }
