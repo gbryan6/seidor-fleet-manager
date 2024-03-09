@@ -70,9 +70,28 @@ const deleteAutomobile = async (req: Request, res: Response) => {
   }
 };
 
+const getAutomobileById = async (req: Request, res: Response) => {
+  try {
+    const automobileId = req.params.id;
+
+    const automobile = await prisma.automobile.findUnique({
+      where: { id: automobileId },
+    });
+
+    if (!automobile) {
+      res.status(404).json({ error: "Automobile not found" });
+
+    } else {
+      res.status(200).json(automobile);
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
 
 export default {
   createAutomobile,
   updateAutomobile,
-  deleteAutomobile
+  deleteAutomobile,
+  getAutomobileById
 }
