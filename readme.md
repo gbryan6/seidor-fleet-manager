@@ -40,12 +40,18 @@ Este projeto é o resultado de um teste técnico realizado como parte de um proc
 
 
 > ## Rotas
+```
+  baseUrl: 'localhost:3333/api/fleet'
+```
 
 > ### Automóveis
 Listar todos os automóveis
 
     - Endpoint: GET /automobile
-    - Descrição: Retorna uma lista de todos os automóveis cadastrados.
+    - Descrição: Retorna uma lista de todos os automóveis cadastrados, com suporte a filtros opcionais.
+    - Parâmetros de Consulta:
+        - color (opcional): Filtra automóveis por cor.
+        - brand (opcional): Filtra automóveis por marca.
     - Controlador: automobileController.listAutomobiles
 
 Buscar automóvel por ID
@@ -95,7 +101,9 @@ Finalizar uma utilização de automóvel
 Listar todos os motoristas
 
     - Endpoint: GET /driver
-    - Descrição: Retorna uma lista de todos os motoristas cadastrados.
+    - Descrição: Retorna uma lista de todos os motoristas cadastrados, com suporte a filtros opcionais.
+    - Parâmetros de Consulta:
+        - name (opcional): Filtra motoristas por nome.
     - Controlador: driverController.listDrivers
 
 Buscar motorista por ID
