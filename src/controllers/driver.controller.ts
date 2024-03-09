@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { prisma } from "../server";
+import { Prisma } from '@prisma/client'
 
 const createDriver = async (req: Request, res: Response) => {
   try {
@@ -68,9 +69,27 @@ const getDriverById = async (req: Request, res: Response) => {
   }
 };
 
+
+const listDrivers = async (req: Request, res: Response) => {
+  try {
+    const { name } = req.query;
+    let filter: Prisma.DriverWhereInput = {};
+    if (name) {
+      filter = { ...filter, name: { contains: name.toString() } };
+    }
+    const drivers = await prisma.driver.findMany({
+      where: filter,
+    });
+    res.status(200).json(drivers);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 export default {
   createDriver,
   updateDriver,
   deleteDriver,
-  getDriverById
+  getDriverById,
+  listDrivers
 }
