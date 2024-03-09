@@ -50,8 +50,27 @@ const deleteDriver = async (req: Request, res: Response) => {
   }
 };
 
+const getDriverById = async (req: Request, res: Response) => {
+  try {
+    const driverId = req.params.id;
+
+    const driver = await prisma.driver.findUnique({
+      where: { id: driverId },
+    });
+
+    if (!driver) {
+      res.status(404).json({ error: "Driver not found" });
+    } else {
+      res.status(200).json(driver);
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 export default {
   createDriver,
   updateDriver,
-  deleteDriver
+  deleteDriver,
+  getDriverById
 }
