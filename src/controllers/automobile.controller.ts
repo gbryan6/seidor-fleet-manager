@@ -56,7 +56,23 @@ const updateAutomobile = async (req: Request, res: Response) => {
   }
 };
 
+const deleteAutomobile = async (req: Request, res: Response) => {
+  try {
+    const automobileId = req.params.id;
+
+    await prisma.automobile.delete({
+      where: { id: automobileId },
+    });
+
+    res.status(204).end();
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+
 export default {
   createAutomobile,
-  updateAutomobile
+  updateAutomobile,
+  deleteAutomobile
 }

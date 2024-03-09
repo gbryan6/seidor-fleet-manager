@@ -6,6 +6,7 @@ const automobileRoutes = Router()
 
 automobileRoutes.post('/create', automobileController.createAutomobile)
 automobileRoutes.put('/update/:id', automobileController.updateAutomobile)
+automobileRoutes.delete('/delete/:id', automobileController.deleteAutomobile)
 
 export default automobileRoutes
 
