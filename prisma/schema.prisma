@@ -18,19 +18,16 @@ model Automobile {
   updatedAt DateTime @updatedAt
 
   drivers DriverUtilization[]
-  Driver  Driver[]
 
   @@map("Automobiles")
 }
 
 model Driver {
-  id           String   @id @default(uuid())
-  name         String
-  automobileId String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id        String   @id @default(uuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  automobile        Automobile?         @relation(fields: [automobileId], references: [id])
   DriverUtilization DriverUtilization[]
 
   @@map("Drivers")
