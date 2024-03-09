@@ -43,6 +43,26 @@ const createAutomobileUtilization = async (req: Request, res: Response) => {
   }
 };
 
+const finishAutomobileUtilization = async (req: Request, res: Response) => {
+  try {
+    const utilizationId = req.params.id;
+    const endDate = new Date();
+
+    const utilization = await prisma.automobileUtilization.update({
+      where: { id: utilizationId },
+      data: {
+        endDate,
+      },
+    });
+
+    res.status(200).json(utilization);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+
 export default {
-  createAutomobileUtilization
+  createAutomobileUtilization,
+  finishAutomobileUtilization
 }
