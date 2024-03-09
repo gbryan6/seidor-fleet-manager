@@ -6,8 +6,8 @@ import driverUtilizationRoutes from './routes/driverUtilization.routes'
 
 const routes = Router()
 
-routes.use('/automobile', autobomileRoutes)
-routes.use('/driver', driverRoutes)
-routes.use('/driver-utilization', driverUtilizationRoutes)
+routes.use('/automobiles', autobomileRoutes)
+routes.use('/drivers', driverRoutes)
+routes.use('/driver-utilizations', driverUtilizationRoutes)
 
 export default routes
