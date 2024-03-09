@@ -36,7 +36,22 @@ const updateDriver = async (req: Request, res: Response) => {
   }
 };
 
+const deleteDriver = async (req: Request, res: Response) => {
+  try {
+    const driverId = req.params.id;
+
+    await prisma.driver.delete({
+      where: { id: driverId },
+    });
+
+    res.status(204).end();
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 export default {
   createDriver,
-  updateDriver
+  updateDriver,
+  deleteDriver
 }
