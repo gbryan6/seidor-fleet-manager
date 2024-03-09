@@ -8,14 +8,6 @@
     "db:migrate": "npx prisma migrate dev --name db-entity --create-only && npx prisma generate",
     "db:push": "npx prisma db push"
   },
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "lib": [
-      "es6",
-      "dom"
-    ]
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",

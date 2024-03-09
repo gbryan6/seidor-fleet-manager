@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json())
 app.use(cors())
 
-app.use('api/fleet', routes)
+app.use('/api/fleet', routes)
 
 app.all("*", (req: Request, res: Response) => {
   res.status(404).json({ error: `Route ${req.originalUrl} not found` });

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { prisma } from "../server";
+import { error } from "console";
 
 const createAutomobile = async (req: Request, res: Response) => {
   try {
@@ -20,13 +21,13 @@ const createAutomobile = async (req: Request, res: Response) => {
         brand,
       },
     });
+
     res.status(201).json(automobile);
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: `Internal server error ${error}` });
   }
 };
 
-
 export default {
-  createAutomobile
+  createAutomobile,
 }

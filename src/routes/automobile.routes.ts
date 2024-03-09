@@ -2,10 +2,10 @@ import { Router } from 'express'
 
 import automobileController from '../controllers/automobile.controller'
 
-const autobomileRoutes = Router()
+const automobileRoutes = Router()
 
-autobomileRoutes.post('/create', automobileController.createAutomobile)
+automobileRoutes.post('/create', automobileController.createAutomobile)
 
-export default autobomileRoutes
+export default automobileRoutes
 
 
