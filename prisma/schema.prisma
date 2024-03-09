@@ -17,7 +17,7 @@ model Automobile {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  drivers DriverUtilization[]
+  drivers AutomobileUtilization[]
 
   @@map("Automobiles")
 }
@@ -28,15 +28,15 @@ model Driver {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  DriverUtilization DriverUtilization[]
+  AutomobileUtilization AutomobileUtilization[]
 
   @@map("Drivers")
 }
 
-model DriverUtilization {
+model AutomobileUtilization {
   id           String    @id @default(uuid())
-  driverId     String
   automobileId String
+  driverId     String
   reason       String
   startDate    DateTime
   endDate      DateTime?
@@ -46,5 +46,5 @@ model DriverUtilization {
   automobile Automobile @relation(fields: [automobileId], references: [id])
   driver     Driver     @relation(fields: [driverId], references: [id])
 
-  @@map("DriverUtilizations")
+  @@map("AutomobileUtilizations")
 }
