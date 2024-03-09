@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only --exit-child src/server.ts",
-    "db:migrate": "npx prisma migrate dev --name db-entity --create-only && npx prisma generate",
+    "db:migrate": "npx prisma migrate dev && npx prisma generate",
     "db:push": "npx prisma db push"
   },
   "keywords": [],
