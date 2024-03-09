@@ -17,6 +17,26 @@ const createDriver = async (req: Request, res: Response) => {
   }
 };
 
+const updateDriver = async (req: Request, res: Response) => {
+  try {
+    const driverId = req.params.id;
+
+    const { name } = req.body;
+
+    const updatedDriver = await prisma.driver.update({
+      where: { id: driverId },
+      data: {
+        name,
+      },
+    });
+
+    res.status(200).json(updatedDriver);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 export default {
-  createDriver
+  createDriver,
+  updateDriver
 }
