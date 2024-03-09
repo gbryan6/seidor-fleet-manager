@@ -28,6 +28,35 @@ const createAutomobile = async (req: Request, res: Response) => {
   }
 };
 
+const updateAutomobile = async (req: Request, res: Response) => {
+  try {
+    const automobileId = req.params.id;
+
+    const { plate, color, brand } = req.body;
+
+    const existingAutomobile = await prisma.automobile.findUnique({
+      where: { plate },
+    });
+
+    if (existingAutomobile) {
+      return res.status(400).json({ error: "Plate already registered" });
+    }
+
+    const updatedAutomobile = await prisma.automobile.update({
+      where: { id: automobileId },
+      data: {
+        plate,
+        color,
+        brand,
+      },
+    });
+    res.status(200).json(updatedAutomobile);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 export default {
   createAutomobile,
+  updateAutomobile
 }
