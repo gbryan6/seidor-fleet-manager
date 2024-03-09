@@ -1,0 +1,53 @@
+// schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Automobile {
+  id        String   @id @default(uuid())
+  plate     String   @unique
+  color     String
+  brand     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  drivers DriverUtilization[]
+  Driver  Driver[]
+
+  @@map("Automobiles")
+}
+
+model Driver {
+  id           String   @id @default(uuid())
+  name         String
+  automobileId String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  automobile        Automobile?         @relation(fields: [automobileId], references: [id])
+  DriverUtilization DriverUtilization[]
+
+  @@map("Drivers")
+}
+
+model DriverUtilization {
+  id           String    @id @default(uuid())
+  driverId     String
+  automobileId String
+  reason       String
+  startDate    DateTime
+  endDate      DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  automobile Automobile @relation(fields: [automobileId], references: [id])
+  driver     Driver     @relation(fields: [driverId], references: [id])
+
+  @@map("DriverUtilizations")
+}
