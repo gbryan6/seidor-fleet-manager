@@ -4,7 +4,7 @@ import automobileUtilizationController from '../controllers/automobileUtilizatio
 
 const automobileUtilizationRoutes = Router()
 
-automobileUtilizationRoutes.get('/', automobileUtilizationController.listAutomobileUtilizations)
+// automobileUtilizationRoutes.get('/', automobileUtilizationController.listAutomobileUtilizations)
 automobileUtilizationRoutes.post('/create', automobileUtilizationController.createAutomobileUtilization)
 automobileUtilizationRoutes.put('/finish/:id', automobileUtilizationController.finishAutomobileUtilization)
 
